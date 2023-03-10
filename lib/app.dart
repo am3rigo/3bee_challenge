@@ -51,8 +51,8 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 24.0),
               ElevatedButton(
                 child: const Text('Login'),
-                onPressed: () {
-                  AuthenticationRepository().loginWithCredentials(
+                onPressed: () async {
+                  await authenticationRepository.loginWithCredentials(
                     'andrea.valenzano@3bee.com',
                     'test2022',
                   );
