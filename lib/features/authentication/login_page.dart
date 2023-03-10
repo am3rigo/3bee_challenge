@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
@@ -9,8 +10,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(
+    text: kDebugMode ? 'andrea.valenzano@3bee.com' : null,
+  );
+  final passwordController = TextEditingController(
+    text: kDebugMode ? 'test2022' : null,
+  );
 
   bool obscurePassword = true;
 
@@ -37,6 +42,13 @@ class _LoginPageState extends State<LoginPage> {
         },
       );
     }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
