@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:threebee_challenge/features/apiaries/apiaries_overview_page.dart';
+import 'package:threebee_challenge/features/apiaries/cubit/apiaries_cubit.dart';
+import 'package:threebee_challenge/shared_export.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const _WrapperBlocProviders();
+  }
+}
+
+class _WrapperBlocProviders extends StatelessWidget {
+  const _WrapperBlocProviders();
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ApiariesCubit(),
+        ),
+      ],
+      child: const _MyApp(),
+    );
+  }
+}
+
+class _MyApp extends StatelessWidget {
+  const _MyApp();
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Flutter Demo',
+      title: '3Bee Challenge',
       home: ApiariesOverviewPage(),
     );
   }

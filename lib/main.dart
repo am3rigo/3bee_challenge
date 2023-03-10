@@ -8,5 +8,5 @@ void main() async {
     environment: Environment.dev,
     baseUrl: 'https://api.3bee.com/api/v1',
   ));
-  runApp(const MyApp());
+  runApp(const MainApp());
 }

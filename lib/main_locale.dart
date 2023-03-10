@@ -9,5 +9,5 @@ void main() async {
     baseUrl: 'http://localhost:5000/api/v1/',
   ));
 
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
