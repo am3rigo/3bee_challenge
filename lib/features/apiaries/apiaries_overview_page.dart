@@ -14,10 +14,13 @@ class ApiariesOverviewPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(
-            height: 20,
+            height: 36,
           ),
-          const Text(
-            'You can see all your apiaries here',
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              'You can see all your apiaries here',
+            ),
           ),
           const SizedBox(
             height: 20,

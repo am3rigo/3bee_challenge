@@ -35,6 +35,9 @@ class _MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: '3Bee Challenge',
       routerConfig: appRouter,
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
       builder: (context, child) {
         return Stack(
           children: [
