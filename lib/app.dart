@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:threebee_challenge/features/authentication/login_page.dart';
+import 'package:threebee_challenge/features/apiaries/apiaries_overview_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Demo',
-      home: LoginPage(),
+      home: ApiariesOverviewPage(),
     );
   }
 }
