@@ -13,10 +13,30 @@ class AuthenticationNotifier extends ChangeNotifier {
         password,
       );
       sharedPrefsService.setValue<String>(kSPAccessToken, authorization!.access);
+      sharedPrefsService.setValue<String>(kSPRefreshToken, authorization!.refresh);
       notifyListeners();
     } catch (e) {
       logout();
       rethrow;
+    }
+  }
+
+  Future<void> verifyToken() async {
+    try {
+      final token = await sharedPrefsService.getValue<String>(kSPAccessToken);
+      final refreshToken = await sharedPrefsService.getValue<String>(kSPRefreshToken);
+
+      if (token == null || refreshToken == null) {
+        logout();
+        return;
+      }
+      await authenticationRepository.verifyToken(token);
+      authorization = AuthorizationModel(
+        access: token,
+        refresh: refreshToken,
+      );
+    } catch (e) {
+      logout();
     }
   }
 

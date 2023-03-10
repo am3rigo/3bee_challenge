@@ -15,6 +15,15 @@ class AuthenticationRepository {
     );
     return AuthorizationModel.fromJson(response.data);
   }
+
+  Future<void> verifyToken(String token) async {
+    await _networkClient.getDio(isAuthenticated: false).post(
+      '/auth/jwt/verify',
+      data: {
+        'token': token,
+      },
+    );
+  }
 }
 
 class MockAuthenticationRepository extends Mock implements AuthenticationRepository {
@@ -24,5 +33,10 @@ class MockAuthenticationRepository extends Mock implements AuthenticationReposit
       access: 'fake-access-token',
       refresh: 'fake-refresh-token',
     );
+  }
+
+  @override
+  Future<void> verifyToken(String token) {
+    return Future.value();
   }
 }

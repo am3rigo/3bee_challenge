@@ -22,6 +22,8 @@ Future<void> bootstrap(EnvironmentConfig config) async {
     _registerSingletonsRepositories();
   }
 
+  await authenticationNotifier.verifyToken();
+
   await _setDeviceOrientation();
 }
 
