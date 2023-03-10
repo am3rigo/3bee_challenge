@@ -26,10 +26,12 @@ void _registerIndipendentSingletons() {
 
 void _registerSingletonsRepositories() {
   GetIt.I.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepository());
+  GetIt.I.registerLazySingleton<ApiariesRepository>(() => ApiariesRepository());
 }
 
 void _registerSingletonsMockRepositories() {
   GetIt.I.registerLazySingleton<AuthenticationRepository>(() => MockAuthenticationRepository());
+  GetIt.I.registerLazySingleton<ApiariesRepository>(() => MockApiariesRepository());
 }
 
 Future _setDeviceOrientation() async {

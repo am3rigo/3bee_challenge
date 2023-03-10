@@ -6,4 +6,6 @@ export 'package:threebee_challenge/models/models.dart';
 export 'package:threebee_challenge/repositories/repositories.dart';
 
 SharedPreferenceService get sharedPrefsService => GetIt.I.get<SharedPreferenceService>();
+
 AuthenticationRepository get authenticationRepository => GetIt.I.get<AuthenticationRepository>();
+ApiariesRepository get apiariesRepository => GetIt.I.get<ApiariesRepository>();
