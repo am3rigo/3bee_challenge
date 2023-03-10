@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:threebee_challenge/features/apiaries/apiaries_overview_page.dart';
 import 'package:threebee_challenge/features/authentication/login_page.dart';
+import 'package:threebee_challenge/shared_export.dart';
 
 GoRouter createGoRouter() {
   return GoRouter(
@@ -16,11 +17,11 @@ GoRouter createGoRouter() {
       ),
     ],
     debugLogDiagnostics: true,
-    // refreshListenable: authenticationNotifier,
+    refreshListenable: authenticationNotifier,
     redirect: (context, state) async {
       return handleRedirect(
         nextLocation: state.subloc,
-        isAuthenticated: true,
+        isAuthenticated: authenticationNotifier.isAuthenticated,
       );
     },
   );

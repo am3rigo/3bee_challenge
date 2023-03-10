@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:threebee_challenge/environment/environment_config.dart';
+import 'package:threebee_challenge/features/authentication/authentication_notifier.dart';
 import 'package:threebee_challenge/router/go_router_config.dart';
 import 'package:threebee_challenge/services/shared_preferences_service.dart';
 import 'package:threebee_challenge/shared_export.dart';
@@ -26,6 +27,7 @@ Future<void> bootstrap(EnvironmentConfig config) async {
 
 void _registerIndipendentSingletons() {
   GetIt.I.registerLazySingleton<SharedPreferenceService>(() => SharedPreferenceService());
+  GetIt.I.registerSingleton<AuthenticationNotifier>(AuthenticationNotifier());
   GetIt.I.registerSingleton<GoRouter>(createGoRouter());
 }
 
