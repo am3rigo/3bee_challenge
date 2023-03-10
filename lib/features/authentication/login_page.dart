@@ -1,8 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  bool obscurePassword = true;
+
+  void doLogin() async {
+    try {
+      await authenticationNotifier.loginWithCredentials(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text(e.toString()),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,27 +58,34 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 48.0),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
                   labelText: 'Email',
                 ),
+                autofillHints: const [
+                  AutofillHints.email,
+                ],
+                keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 8.0),
-              const TextField(
+              TextField(
+                controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  suffixIcon: IconButton(
+                    onPressed: () => setState(() => obscurePassword = !obscurePassword),
+                    icon: Icon(
+                      obscurePassword ? Icons.visibility_off : Icons.visibility_rounded,
+                    ),
+                  ),
                 ),
-                obscureText: true,
+                obscureText: obscurePassword,
               ),
               const SizedBox(height: 24.0),
               ElevatedButton(
+                onPressed: doLogin,
                 child: const Text('Login'),
-                onPressed: () async {
-                  authenticationNotifier.loginWithCredentials(
-                    'andrea.valenzano@3bee.com',
-                    'test2022',
-                  );
-                },
               ),
             ],
           ),

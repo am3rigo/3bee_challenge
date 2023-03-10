@@ -9,13 +9,14 @@ class AuthenticationNotifier extends ChangeNotifier {
   Future<void> loginWithCredentials(String email, String password) async {
     try {
       authorization = await authenticationRepository.loginWithCredentials(
-        'andrea.valenzano@3bee.com',
-        'test2022',
+        email,
+        password,
       );
       sharedPrefsService.setValue<String>(kSPAccessToken, authorization!.access);
       notifyListeners();
     } catch (e) {
       logout();
+      rethrow;
     }
   }
 
