@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:threebee_challenge/features/apiaries/apiaries_overview_page.dart';
 import 'package:threebee_challenge/features/apiaries/cubit/apiaries_cubit.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
@@ -34,9 +33,9 @@ class _MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       title: '3Bee Challenge',
-      home: ApiariesOverviewPage(),
+      routerConfig: appRouter,
     );
   }
 }
