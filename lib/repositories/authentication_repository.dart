@@ -6,7 +6,7 @@ class AuthenticationRepository {
   final _networkClient = NetworkClient();
 
   Future<AuthorizationModel> loginWithCredentials(String email, String password) async {
-    final response = await _networkClient.getDio().post(
+    final response = await _networkClient.getDio(isAuthenticated: false).post(
       '/auth/jwt/create',
       data: {
         'email': email,

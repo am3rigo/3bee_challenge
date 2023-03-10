@@ -9,6 +9,8 @@ import 'package:threebee_challenge/shared_export.dart';
 Future<void> bootstrap(EnvironmentConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  GetIt.I.registerSingleton<EnvironmentConfig>(config);
+
   _registerIndipendentSingletons();
 
   if (config.environment.isLocale) {

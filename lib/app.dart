@@ -21,6 +21,7 @@ class _WrapperBlocProviders extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => ApiariesCubit(),
+          lazy: false,
         ),
       ],
       child: const _MyApp(),

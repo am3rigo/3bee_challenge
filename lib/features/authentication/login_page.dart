@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:threebee_challenge/constants/constants.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
 class LoginPage extends StatelessWidget {
@@ -39,10 +40,11 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 child: const Text('Login'),
                 onPressed: () async {
-                  await authenticationRepository.loginWithCredentials(
+                  final authorization = await authenticationRepository.loginWithCredentials(
                     'andrea.valenzano@3bee.com',
                     'test2022',
                   );
+                  sharedPrefsService.setValue<String>(kSPAccessToken, authorization.access);
                 },
               ),
             ],
