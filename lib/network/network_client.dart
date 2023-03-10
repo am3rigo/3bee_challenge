@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:threebee_challenge/network/authentication_interceptors.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
@@ -24,14 +22,14 @@ class NetworkClient {
       dio.interceptors.add(AuthenticateInterceptors());
     }
 
-    if (!kReleaseMode) {
-      dio.interceptors.add(PrettyDioLogger(
-        request: true,
-        responseBody: true,
-        requestBody: true,
-        requestHeader: true,
-      ));
-    }
+    // if (!kReleaseMode) {
+    //   dio.interceptors.add(PrettyDioLogger(
+    //     request: true,
+    //     responseBody: true,
+    //     requestBody: true,
+    //     requestHeader: true,
+    //   ));
+    // }
 
     return dio;
   }

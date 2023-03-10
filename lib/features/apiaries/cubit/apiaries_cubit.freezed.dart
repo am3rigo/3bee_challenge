@@ -19,21 +19,21 @@ mixin _$ApiariesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String messageError) error,
     required TResult Function(List<ApiaryModel> apiaries) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(String messageError)? error,
     TResult? Function(List<ApiaryModel> apiaries)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String messageError)? error,
     TResult Function(List<ApiaryModel> apiaries)? loaded,
     required TResult orElse(),
   }) =>
@@ -118,7 +118,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String messageError) error,
     required TResult Function(List<ApiaryModel> apiaries) loaded,
   }) {
     return loading();
@@ -128,7 +128,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(String messageError)? error,
     TResult? Function(List<ApiaryModel> apiaries)? loaded,
   }) {
     return loading?.call();
@@ -138,7 +138,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String messageError)? error,
     TResult Function(List<ApiaryModel> apiaries)? loaded,
     required TResult orElse(),
   }) {
@@ -191,6 +191,8 @@ abstract class _Initial implements ApiariesState {
 abstract class _$$_ErrorCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String messageError});
 }
 
 /// @nodoc
@@ -199,57 +201,82 @@ class __$$_ErrorCopyWithImpl<$Res>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? messageError = null,
+  }) {
+    return _then(_$_Error(
+      null == messageError
+          ? _value.messageError
+          : messageError // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error();
+  const _$_Error(this.messageError);
+
+  @override
+  final String messageError;
 
   @override
   String toString() {
-    return 'ApiariesState.error()';
+    return 'ApiariesState.error(messageError: $messageError)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Error);
+        (other.runtimeType == runtimeType &&
+            other is _$_Error &&
+            (identical(other.messageError, messageError) ||
+                other.messageError == messageError));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, messageError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String messageError) error,
     required TResult Function(List<ApiaryModel> apiaries) loaded,
   }) {
-    return error();
+    return error(messageError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(String messageError)? error,
     TResult? Function(List<ApiaryModel> apiaries)? loaded,
   }) {
-    return error?.call();
+    return error?.call(messageError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String messageError)? error,
     TResult Function(List<ApiaryModel> apiaries)? loaded,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(messageError);
     }
     return orElse();
   }
@@ -290,7 +317,12 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements ApiariesState {
-  const factory _Error() = _$_Error;
+  const factory _Error(final String messageError) = _$_Error;
+
+  String get messageError;
+  @JsonKey(ignore: true)
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -362,7 +394,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(String messageError) error,
     required TResult Function(List<ApiaryModel> apiaries) loaded,
   }) {
     return loaded(apiaries);
@@ -372,7 +404,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(String messageError)? error,
     TResult? Function(List<ApiaryModel> apiaries)? loaded,
   }) {
     return loaded?.call(apiaries);
@@ -382,7 +414,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(String messageError)? error,
     TResult Function(List<ApiaryModel> apiaries)? loaded,
     required TResult orElse(),
   }) {

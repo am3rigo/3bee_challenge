@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:threebee_challenge/shared_export.dart';
 import 'package:jiffy/jiffy.dart';
 
 const _colorGreen = Color(0xFFACC16F);
 
 class ApiaryCard extends StatelessWidget {
-  const ApiaryCard({super.key});
+  const ApiaryCard({
+    super.key,
+    required this.apiary,
+  });
+
+  final ApiaryModel apiary;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +30,25 @@ class ApiaryCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Positioned.fill(
-              child: Image.network(
-                'https://source.unsplash.com/random/300×300',
-                fit: BoxFit.cover,
+            if (apiary.thumbnailApiaryListUrl == null) ...[
+              Positioned.fill(
+                child: Container(
+                  color: const Color(0xFFDA954B),
+                ),
               ),
-            ),
-            Positioned.fill(
-              child: Container(
-                color: Colors.black.withOpacity(0.3),
+            ] else ...[
+              Positioned.fill(
+                child: Image.network(
+                  apiary.thumbnailApiaryListUrl!,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withOpacity(0.3),
+                ),
+              ),
+            ],
             Positioned.fill(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 22.0),
@@ -45,11 +59,11 @@ class ApiaryCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 22.0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 22.0),
                             child: Text(
-                              'Arnia Lulu',
-                              style: TextStyle(
+                              apiary.name ?? 'Apiary name not available',
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -75,17 +89,17 @@ class ApiaryCard extends StatelessWidget {
                                 bottom: 5,
                               ),
                               child: RichText(
-                                text: const TextSpan(
+                                text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: '- 0.2 ',
-                                      style: TextStyle(
+                                      text: apiary.lastWeight != null ? apiary.lastWeight?.toStringAsFixed(2) : '-',
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'kg',
                                       style: TextStyle(
                                         fontSize: 14,
@@ -111,7 +125,10 @@ class ApiaryCard extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              Jiffy.now().format(pattern: "dd MMM"),
+                              apiary.lastUpdateAt != null
+                                  ? Jiffy.parseFromMillisecondsSinceEpoch(apiary.lastUpdateAt! * 1000)
+                                      .format(pattern: "dd MMM")
+                                  : '-',
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -119,10 +136,10 @@ class ApiaryCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Flexible(
+                          Flexible(
                             child: Text(
-                              '75775',
-                              style: TextStyle(
+                              apiary.imageId?.toString() ?? '',
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,

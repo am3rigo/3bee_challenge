@@ -6,11 +6,12 @@ class ApiariesRepository {
   final _networkClient = NetworkClient();
 
   Future<List<ApiaryModel>> getApiaries() async {
-    final response = await _networkClient.getDio().post(
+    final response = await _networkClient.getDio().get(
           '/apiaries',
         );
 
     final results = response.data["results"] as List<dynamic>;
+
     final apiaryList = <ApiaryModel>[];
 
     for (var apiaryJSON in results) {
