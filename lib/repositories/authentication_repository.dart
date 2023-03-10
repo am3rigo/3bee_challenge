@@ -1,3 +1,4 @@
+import 'package:mockito/mockito.dart';
 import 'package:threebee_challenge/network/network_client.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
@@ -13,5 +14,15 @@ class AuthenticationRepository {
       },
     );
     return AuthorizationModel.fromJson(response.data);
+  }
+}
+
+class MockAuthenticationRepository extends Mock implements AuthenticationRepository {
+  @override
+  Future<AuthorizationModel> loginWithCredentials(String email, String password) async {
+    return const AuthorizationModel(
+      access: 'fake-access-token',
+      refresh: 'fake-refresh-token',
+    );
   }
 }

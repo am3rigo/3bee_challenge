@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:threebee_challenge/environment/environment_config.dart';
 import 'package:threebee_challenge/services/shared_preferences_service.dart';
+import 'package:threebee_challenge/shared_export.dart';
 
 /// This is the entry point of the application
-Future<void> bootstrap() async {
+Future<void> bootstrap(EnvironmentConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize singletons
-  _registerSingletons();
+  _registerIndipendentSingletons();
+
+  if (config.environment.isLocale) {
+    _registerSingletonsMockRepositories();
+  } else {
+    _registerSingletonsRepositories();
+  }
 
   await _setDeviceOrientation();
 }
 
-void _registerSingletons() {
-  GetIt.I.registerLazySingleton<SharedPreferenceService>(
-      () => SharedPreferenceService());
+void _registerIndipendentSingletons() {
+  GetIt.I.registerLazySingleton<SharedPreferenceService>(() => SharedPreferenceService());
+}
+
+void _registerSingletonsRepositories() {
+  GetIt.I.registerLazySingleton<AuthenticationRepository>(() => AuthenticationRepository());
+}
+
+void _registerSingletonsMockRepositories() {
+  GetIt.I.registerLazySingleton<AuthenticationRepository>(() => MockAuthenticationRepository());
 }
 
 Future _setDeviceOrientation() async {
