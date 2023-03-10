@@ -11,5 +11,8 @@ class AuthenticationRepository {
         'password': password,
       },
     );
+
+    final accessToken = response.data['access'] as String?;
+    final refreshToken = response.data['refresh'] as String?;
   }
 }
