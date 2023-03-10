@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:threebee_challenge/features/apiaries/widgets/apiaries_card.dart';
+import 'package:threebee_challenge/features/apiaries/widgets/apiary_card.dart';
 
 class ApiariesOverviewPage extends StatelessWidget {
   const ApiariesOverviewPage({super.key});
@@ -26,9 +26,10 @@ class ApiariesOverviewPage extends StatelessWidget {
             maxHeight: 200,
             child: ListView.builder(
               itemCount: 10,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return const ApiariesCard();
+                return const ApiaryCard();
               },
             ),
           ),
