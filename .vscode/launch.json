@@ -10,6 +10,13 @@
       "type": "dart"
     },
     {
+      "name": "Dev Locale",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_locale.dart",
+      "args": ["--target", "lib/main_locale.dart"]
+    },
+    {
       "name": "Dev (profile mode)",
       "request": "launch",
       "type": "dart",
