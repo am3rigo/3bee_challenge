@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:threebee_challenge/features/apiaries/apiaries_overview_page.dart';
+import 'package:threebee_challenge/features/apiaries/cubit/apiaries_cubit.dart';
 import 'package:threebee_challenge/features/authentication/login_page.dart';
 import 'package:threebee_challenge/shared_export.dart';
 
@@ -13,7 +14,11 @@ GoRouter createGoRouter() {
       ),
       GoRoute(
         path: '/',
-        builder: (context, state) => const ApiariesOverviewPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => ApiariesCubit(),
+          lazy: false,
+          child: const ApiariesOverviewPage(),
+        ),
       ),
     ],
     debugLogDiagnostics: true,
